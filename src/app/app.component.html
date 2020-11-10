@@ -8,8 +8,9 @@
         (input)="userText = $event.target.value"
       />
       <span>
-        <ul class="list" *ngFor="let item of userList; let i = index">
-          <li><input type="checkbox" name="remove" data-md-icheck (change)="removeText(i)" id="">{{item}}</li>
+        <input type="checkbox" name="remove" data-md-icheck (change)="toggleDisplay()" id="" style="width: 20px;"/>
+        <ul class="list" *ngIf="!isShow">
+          <li *ngFor="let item of userList; let i = index">{{item}}</li>
         </ul>
       </span>
     </div>

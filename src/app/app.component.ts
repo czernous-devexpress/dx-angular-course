@@ -24,7 +24,10 @@ export class AppComponent {
     }
     console.log(this.userList);
    }
-
+   isShow = false;
+   toggleDisplay() {
+    this.isShow = !this.isShow;
+  }
   // public clickBtn() {
   //   const printAndClear = () => {
   //     console.log(this.userText);
