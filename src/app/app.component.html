@@ -7,10 +7,14 @@
         [value]="userText"
         (input)="userText = $event.target.value"
       />
-      <span>Your text: {{ userText }}</span>
+      <span>
+        <ul class="list" *ngFor="let item of userList; let i = index">
+          <li><input type="checkbox" name="remove" data-md-icheck (change)="removeText(i)" id="">{{item}}</li>
+        </ul>
+      </span>
     </div>
     <div class="btn-container">
-      <button (click)="clickBtn()">Print to console</button>
+      <button (click)="addText()">Add to list</button>
     </div>
-  </div>
+
 </div>
