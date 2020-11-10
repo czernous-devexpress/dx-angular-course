@@ -1,5 +1,5 @@
 <div class="content" role="main">
-  <div class="card card-small" tabindex="0">
+  <!-- <div class="card card-small" tabindex="0">
     <div class="input-container">
       <input
         type="text"
@@ -9,13 +9,32 @@
       />
       <span>
         <input type="checkbox" name="remove" data-md-icheck (change)="toggleDisplay()" id="" style="width: 20px;"/>
-        <ul class="list" *ngIf="!isShow">
+        <ul class="list" *ngIf="!visible">
           <li *ngFor="let item of userList; let i = index">{{item}}</li>
         </ul>
       </span>
     </div>
     <div class="btn-container">
       <button (click)="addText()">Add to list</button>
+    </div>
+    </div> -->
+    <style>
+    .green {
+      background: #98ed9f!important;
+    }
+    .red {
+      background: #e0606d;
+    }
+  </style>
+    <div class="red card card-small" [ngClass]="{ green: toggleRed }" style="width: 500px; height: 500px;">
+      <button (click)="toggleColor()">
+        change color
+      </button>
+    </div>
+    <div class="card card-small" [ngStyle]="getStyle()" style="width: 500px; height: 500px;">
+      <button (click)="toggleSecondColor()">
+        change color
+      </button>
     </div>
 
 </div>
