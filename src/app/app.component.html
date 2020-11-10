@@ -1,0 +1,16 @@
+<div class="content" role="main">
+  <div class="card card-small" tabindex="0">
+    <div class="input-container">
+      <input
+        type="text"
+        placeholder="type something here"
+        [value]="userText"
+        (input)="userText = $event.target.value"
+      />
+      <span>Your text: {{ userText }}</span>
+    </div>
+    <div class="btn-container">
+      <button (click)="clickBtn()">print to console</button>
+    </div>
+  </div>
+</div>
