@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-app';
+
+  userText: string = '';
+
+  public clickBtn() {
+    const printAndClear = () => {
+      console.log(this.userText);
+      this.userText = '';
+    }
+    return printAndClear();
+  }
 }
