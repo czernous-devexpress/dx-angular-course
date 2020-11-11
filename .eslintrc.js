@@ -13,7 +13,10 @@ module.exports = {
         'prettier/@typescript-eslint',
         'plugin:prettier/recommended',
       ],
-      rules: {},
+      rules: {
+        'import/prefer-default-export': 'off',
+        'import/no-default-export': 'error',
+      },
     },
     {
       files: ['*.component.html'],

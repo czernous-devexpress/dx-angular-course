@@ -1,12 +1,8 @@
 <div class="content" role="main">
-  <div class="card card-small" [ngClass]="isGreen ? 'green' : 'red'">
-    <button (click)="this.isGreen = !this.isGreen">
-      change color
-    </button>
-  </div>
-  <div class="card card-small" [ngStyle]="getStyle()">
-    <button (click)="this.isLarge = !this.isLarge">
-      change color & size
-    </button>
+  <div class="card card-small">
+    <my-comp
+      [(text)]="myComponentValue"
+      (onGetValueClick)="onMyComponentGetValueClick($event)"
+    ></my-comp>
   </div>
 </div>
