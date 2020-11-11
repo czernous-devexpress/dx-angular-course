@@ -4,23 +4,16 @@ module.exports = {
     {
       files: ['*.ts'],
       parserOptions: {
-        project: [
-          'tsconfig.*?.json',
-          'e2e/tsconfig.json',
-          'prettier/@typescript-eslint',
-          'plugin:prettier/recommended',
-        ],
+        project: ['tsconfig.*?.json', 'e2e/tsconfig.json'],
         createDefaultProgram: true,
       },
-      extends: ['plugin:@angular-eslint/recommended', 'airbnb-typescript/base'],
-      rules: {
-        '@typescript-eslint/unbound-method': [
-          'error',
-          {
-            ignoreStatic: true,
-          },
-        ],
-      },
+      extends: [
+        'plugin:@angular-eslint/recommended',
+        'airbnb-typescript/base',
+        'prettier/@typescript-eslint',
+        'plugin:prettier/recommended',
+      ],
+      rules: {},
     },
     {
       files: ['*.component.html'],

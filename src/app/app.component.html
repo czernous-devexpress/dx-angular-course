@@ -1,42 +1,11 @@
 <div class="content" role="main">
-  <!-- <div class="card card-small" tabindex="0">
-    <div class="input-container">
-      <input
-        type="text"
-        placeholder="type something here"
-        [value]="userText"
-        (input)="userText = $event.target.value"
-      />
-      <span>
-        <input type="checkbox" name="remove" data-md-icheck (change)="toggleDisplay()" id="" style="width: 20px;"/>
-        <ul class="list" *ngIf="!visible">
-          <li *ngFor="let item of userList; let i = index">{{item}}</li>
-        </ul>
-      </span>
-    </div>
-    <div class="btn-container">
-      <button (click)="addText()">Add to list</button>
-    </div>
-    </div> -->
-  <style>
-    .green {
-      background: #98ed9f !important;
-    }
-    .red {
-      background: #e0606d;
-    }
-  </style>
-  <div
-    class="red card card-small"
-    [ngClass]="{ green: toggleRed }"
-    style="width: 500px; height: 500px;"
-  >
-    <button (click)="toggleColor()">
+  <div class="card card-small" [ngClass]="isGreen ? 'green' : 'red'">
+    <button (click)="this.isGreen = !this.isGreen">
       change color
     </button>
   </div>
-  <div class="card card-small" [ngStyle]="getStyle()" style="width: 500px; height: 500px;">
-    <button (click)="toggleSecondColor()">
+  <div class="card card-small" [ngStyle]="getStyle()">
+    <button (click)="this.isLarge = !this.isLarge">
       change color & size
     </button>
   </div>
