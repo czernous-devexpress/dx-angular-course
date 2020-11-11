@@ -18,23 +18,26 @@
       <button (click)="addText()">Add to list</button>
     </div>
     </div> -->
-    <style>
+  <style>
     .green {
-      background: #98ed9f!important;
+      background: #98ed9f !important;
     }
     .red {
       background: #e0606d;
     }
   </style>
-    <div class="red card card-small" [ngClass]="{ green: toggleRed }" style="width: 500px; height: 500px;">
-      <button (click)="toggleColor()">
-        change color
-      </button>
-    </div>
-    <div class="card card-small" [ngStyle]="getStyle()" style="width: 500px; height: 500px;">
-      <button (click)="toggleSecondColor()">
-        change color
-      </button>
-    </div>
-
+  <div
+    class="red card card-small"
+    [ngClass]="{ green: toggleRed }"
+    style="width: 500px; height: 500px;"
+  >
+    <button (click)="toggleColor()">
+      change color
+    </button>
+  </div>
+  <div class="card card-small" [ngStyle]="getStyle()" style="width: 500px; height: 500px;">
+    <button (click)="toggleSecondColor()">
+      change color & size
+    </button>
+  </div>
 </div>
