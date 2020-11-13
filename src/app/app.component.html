@@ -1,8 +1,8 @@
 <div class="content" role="main">
+  <h2>{{ title }}</h2>
   <div class="card card-small">
-    <my-comp
-      [(text)]="myComponentValue"
-      (onGetValueClick)="onMyComponentGetValueClick($event)"
-    ></my-comp>
+    <dx-text-box [(value)]="dxTextBoxValue" style="margin: 1em; height: 200px"></dx-text-box>
+    <dx-button text="Show Text" (onClick)="displayText()"> </dx-button>
+    <div class="displayDxTextBoxValue">{{ divTextValue }}</div>
   </div>
 </div>

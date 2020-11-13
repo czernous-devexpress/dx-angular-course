@@ -9,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   myComponentValue = 'test';
+
+  title = 'DX-TEST-APP';
+
+  dxTextBoxValue = '';
+
+  divTextValue = '';
+
+  displayText() {
+    console.log('disaplytext');
+    this.divTextValue = this.dxTextBoxValue;
+  }
 }
