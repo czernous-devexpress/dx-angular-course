@@ -3,6 +3,13 @@
   <div class="card card-small">
     <dx-text-box [(value)]="dxTextBoxValue" style="margin: 1em; height: 200px"></dx-text-box>
     <dx-button text="Show Text" (onClick)="displayText()"> </dx-button>
-    <div class="displayDxTextBoxValue">{{ divTextValue }}</div>
+    <dx-popup
+    title="Text Box value"
+    [(visible)]="isPopupVisible"
+    contentTemplate="popupContent">
+      <div *dxTemplate="let data of 'popupContent'">
+        <app-popup-content [(popupValue)]="dxTextBoxValue"></app-popup-content>
+      </div>
+    </dx-popup>
   </div>
 </div>

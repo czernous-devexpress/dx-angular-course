@@ -8,16 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  myComponentValue = 'test';
-
   title = 'DX-TEST-APP';
 
   dxTextBoxValue = '';
 
-  divTextValue = '';
-
+  isPopupVisible = false;
+  
   displayText() {
-    console.log('disaplytext');
-    this.divTextValue = this.dxTextBoxValue;
+    this.isPopupVisible = true;
   }
 }
