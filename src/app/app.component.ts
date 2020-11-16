@@ -3,33 +3,36 @@ import { Component, enableProdMode, ViewChild } from '@angular/core';
 
 import { Service, Employee } from './app.service';
 import { DxDataGridComponent } from "devextreme-angular";
+import validationEngine from 'devextreme/ui/validation_engine';
 
 
 @Component({
     selector: 'demo-app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    providers: [Service]
 })
 export class AppComponent {
-    employees: Employee[];
-
-    columnVisible: boolean =  false;
-
-    constructor(service: Service) {
-        this.employees = service.getEmployees();
+    constructor() {
+        this.customCallback = this.customCallback.bind(this);
     }
-    calculateCellValue(data) {
-        return [data.Title, data.FirstName, data.LastName].join(" ");
+    checkBoxValue: boolean =  false;
+   text: string;
+   number: number;
+   validate(params) {
+        let result = params.validationGroup.validate();
+        if (result.isValid) {
+            // the values are valid
+            // submit and reset them
+            // params.validationGroup.reset();
+            console.log(result)
+        }
     }
-    @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent;
-
-    getZip(rowIndex, dataField) {
-        this.dataGrid.instance.cellValue(rowIndex, dataField);
-        alert(`Mr. Heart's Zip code is ${this.dataGrid.instance.cellValue(rowIndex, dataField)}`);
-    }
-
-    toggleVisibility() {
-        !this.columnVisible ? this.columnVisible = true : this.columnVisible = false
+    customCallback(e) {
+        if (this.checkBoxValue) {
+            alert(e.value);
+            return !!e.value;
+        }
+        alert('checkbox unchecked');
+        return true;
     }
 }
