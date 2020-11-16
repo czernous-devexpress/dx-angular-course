@@ -20,6 +20,9 @@ h6 {
 p {
   margin: 0;
 }
+::ng-deep #gridContainer {
+  height: 440px;
+}
 .content {
   display: flex;
   flex-direction: column;

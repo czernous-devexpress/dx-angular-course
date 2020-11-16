@@ -22,9 +22,17 @@
     "devextreme": "20.1.7",
     "devextreme-angular": "20.1.7",
     "devextreme-schematics": "^1.2.4",
+    "devexpress-gantt": "2.0.0",
+    "devexpress-diagram": "2.0.0",
+    "devextreme-quill": "0.9.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "rrule": "2.6.6",
+    "preact": "10.5.7",
+    "luxon": "1.25.0",
+    "jszip": "3.5.0",
+    "es6-object-assign": "1.1.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1002.0",
@@ -37,7 +45,7 @@
     "@angular/compiler-cli": "~11.0.0",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^12.11.1",
+    "@types/node": "^12.19.4",
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
     "codelyzer": "^6.0.0",

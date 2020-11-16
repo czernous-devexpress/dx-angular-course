@@ -1,42 +1,35 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
-import { Component } from '@angular/core';
-import CustomStore from "devextreme/data/custom_store";
-import DataSource from "devextreme/data/data_source";
+import { Component, enableProdMode, ViewChild } from '@angular/core';
+
+
+import { Service, Employee } from './app.service';
+import { DxDataGridComponent } from "devextreme-angular";
+
+
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    selector: 'demo-app',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    providers: [Service]
 })
 export class AppComponent {
-  store: CustomStore;
-  dataSource: DataSource;
+    employees: Employee[];
 
-  title = 'DX-TEST-APP';
+    columnVisible: boolean =  false;
 
-  catchInput = '';
+    constructor(service: Service) {
+        this.employees = service.getEmployees();
+    }
+    calculateCellValue(data) {
+        return [data.Title, data.FirstName, data.LastName].join(" ");
+    }
+    @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent;
 
-  countries: { id: number, name: string }[] = [
-    {id: 0, name: 'Albania'},
-    {id: 1, name: 'Armenia'},
-    {id: 2, name: 'Belarus'},
-    {id: 3, name: 'Bahrain'},
-    {id: 4, name: 'Canada'},
-    {id: 5, name: 'Cambodia'}
-  ]
-  constructor() {
-    this.store = new CustomStore({
-        load: () => {
-           return this.countries;
-            
-        },
+    getZip(rowIndex, dataField) {
+        this.dataGrid.instance.cellValue(rowIndex, dataField);
+        alert(`Mr. Heart's Zip code is ${this.dataGrid.instance.cellValue(rowIndex, dataField)}`);
+    }
 
-    })
-    this.dataSource = new DataSource({
-        store: this.store,
-
-    });
-  }
+    toggleVisibility() {
+        !this.columnVisible ? this.columnVisible = true : this.columnVisible = false
+    }
 }
-
-

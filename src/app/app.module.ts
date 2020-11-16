@@ -1,14 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DxButtonModule, DxPopupModule, DxSelectBoxModule, DxTextBoxModule } from 'devextreme-angular';
+import { DxButtonModule, DxPopupModule, DxSelectBoxModule, DxTextBoxModule, DxDataGridModule } from 'devextreme-angular';
 
 import { AppComponent } from './app.component';
-import { PopupContentComponent } from './popup-content/popup-content.component';
 
 @NgModule({
-  declarations: [AppComponent, PopupContentComponent],
-  imports: [BrowserModule, FormsModule, DxButtonModule, DxTextBoxModule, DxPopupModule, DxSelectBoxModule],
+  declarations: [AppComponent],
+  imports: [BrowserModule, FormsModule, DxButtonModule, DxTextBoxModule, DxPopupModule, DxSelectBoxModule, DxDataGridModule],
   providers: [],
   bootstrap: [AppComponent],
 })
