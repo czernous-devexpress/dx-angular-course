@@ -1,28 +1,46 @@
 <div class="content">
-    <div class="card card-small">
-        <div class="textBoxContainer">
-            <dx-validation-group>
-                <dx-text-box 
-                name="textPattern"
-                placeholder="enter some text" 
-                [(value)]="text"        
-                >
-                    <dx-validator>
-                        <dxi-validation-rule type="required" message="text is required"></dxi-validation-rule>
-                     </dx-validator>
-                </dx-text-box>
-                <dx-text-box placeholder="enter some numbers" [(value)]="number">
-                    <dx-validator>
-                        <dxi-validation-rule 
-                        type="custom" 
-                        [validationCallback]="customCallback" 
-                        message="enter a number / numbers">
-                        </dxi-validation-rule>
-                    </dx-validator>
-                </dx-text-box>
-                <dx-button text="validate" (onClick)="validate($event)"></dx-button>
-                <dx-check-box [(value)]="checkBoxValue"></dx-check-box>
-            </dx-validation-group>
-        </div>
-    </div>
+  <div class="card card-small">
+    <dx-form [(formData)]="formValues">
+      <dxi-item
+        itemType="simple"
+        dataField="text"
+        editorType="dxTextBox"
+        [editorOptions]="{ placeholder: 'Enter a word' }"
+      >
+        <dxi-validation-rule type="required" message="text is required"></dxi-validation-rule>
+      </dxi-item>
+      <dxi-item
+        itemType="simple"
+        dataField="nubmer"
+        editorType="dxTextBox"
+        [editorOptions]="{ placeholder: 'Enter a number' }"
+      >
+        <dxi-validation-rule
+          type="custom"
+          [validationCallback]="customCallback"
+          message="enter a number / numbers"
+          [reevaluate]="true"
+        >
+        </dxi-validation-rule>
+      </dxi-item>
+      <dxi-item itemType="button" [buttonOptions]="buttonOptions"></dxi-item>
+      <dxi-item
+        itemType="simple"
+        dataField="checkBoxValue"
+        editorType="dxCheckBox"
+        [editorOptions]="{
+          text: 'check this box to validate numbers',
+          value: false
+        }"
+      >
+        <dxo-label [visible]="false"> </dxo-label>
+        <dxi-validation-rule
+          type="compare"
+          [comparisonTarget]="checkComparison"
+          message="You must check this box"
+        >
+        </dxi-validation-rule>
+      </dxi-item>
+    </dx-form>
+  </div>
 </div>

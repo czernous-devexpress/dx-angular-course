@@ -1,16 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { 
+import {
   DxButtonModule,
-  DxPopupModule, 
-  DxSelectBoxModule, 
-  DxTextBoxModule, 
-  DxDataGridModule, 
+  DxPopupModule,
+  DxSelectBoxModule,
+  DxTextBoxModule,
+  DxDataGridModule,
   DxCheckBoxModule,
   DxValidatorModule,
   DxValidationSummaryModule,
   DxValidationGroupModule,
+  DxFormModule,
 } from 'devextreme-angular';
 
 import { AppComponent } from './app.component';
@@ -18,14 +19,15 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, 
-    FormsModule, 
+    BrowserModule,
+    FormsModule,
     DxButtonModule,
-    DxTextBoxModule, 
-    DxPopupModule, 
-    DxSelectBoxModule, 
-    DxDataGridModule, 
+    DxTextBoxModule,
+    DxPopupModule,
+    DxSelectBoxModule,
+    DxDataGridModule,
     DxCheckBoxModule,
+    DxFormModule,
     DxValidatorModule,
     DxValidationSummaryModule,
     DxValidationGroupModule,
