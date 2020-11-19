@@ -1,6 +1,6 @@
 <div class="content">
   <div class="card card-small">
-    <dx-form [(formData)]="formValues">
+    <!-- <dx-form [(formData)]="formValues">
       <dxi-item
         itemType="simple"
         dataField="text"
@@ -41,6 +41,16 @@
         >
         </dxi-validation-rule>
       </dxi-item>
-    </dx-form>
+    </dx-form> -->
+    <dx-data-grid [dataSource]="employees">
+      <dxi-column dataField="ID" [visible]="false"></dxi-column>
+      <dxi-column dataField="FirstName" [setCellValue]="setFirstNameValue">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-column>
+      <dxi-column dataField="LastName" [setCellValue]="setLastNameValue">
+        <dxi-validation-rule type="required"></dxi-validation-rule>
+      </dxi-column>
+      <dxo-editing mode="popup" [allowUpdating]="true" [allowDeleting]="true"> </dxo-editing>
+    </dx-data-grid>
   </div>
 </div>

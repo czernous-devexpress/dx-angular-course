@@ -1,47 +1,33 @@
 import { Component } from '@angular/core';
 
-import validationEngine from 'devextreme/ui/validation_engine';
+import { EmployeesService, Employee } from './employees.service';
 
 @Component({
   selector: 'demo-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  providers: [EmployeesService],
 })
 export class AppComponent {
-  constructor() {
-    this.customCallback = this.customCallback.bind(this);
+  employees: Employee[];
+
+  constructor(service: EmployeesService) {
+    this.employees = service.getEmployees();
   }
 
-  formValues = {
-    checkBoxValue: false,
-
-    text: '',
-
-    number: '',
-  };
-
-  buttonOptions = {
-    text: 'validate',
-    onClick(params) {
-      const result = params.validationGroup.validate();
-      if (result.isValid) {
-        // the values are valid
-        // submit and reset them
-        // params.validationGroup.reset();
-        console.log(result);
-      }
-    },
-  };
-
-  customCallback(e) {
-    console.log(`callback is ${this.formValues.checkBoxValue}`);
-    if (this.formValues.checkBoxValue) {
-      return !!e.value;
+  setLastNameValue(newData, value, currentRowData) {
+    newData.LastName = value;
+    if (value.length === 0 && currentRowData.FirstName.length === 0) {
+      newData.FirstName = 'John';
+      newData.LastName = 'Doe';
     }
-    return true;
   }
 
-  checkComparison() {
-    return true;
+  setFirstNameValue(newData, value, currentRowData) {
+    newData.FirstName = value;
+    if (value.length === 0 && currentRowData.LastName.length === 0) {
+      newData.FirstName = 'John';
+      newData.LastName = 'Doe';
+    }
   }
 }
