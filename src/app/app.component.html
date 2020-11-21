@@ -2,7 +2,7 @@
   <div class="card card-small">
     <dx-data-grid keyExpr="ID" [dataSource]="dataSource">
       <dxo-editing mode="row" [allowUpdating]="true"> </dxo-editing>
-      <dxi-column dataField="ID" caption="Employee Name">
+      <dxi-column dataField="ID" caption="Employee Name" [setCellValue]="setEmployeeValue">
         <dxo-lookup [dataSource]="dataSource" valueExpr="ID" displayExpr="FullName"> </dxo-lookup>
       </dxi-column>
       <dxi-column dataField="CountryID" caption="Country" [setCellValue]="setCountryValue">

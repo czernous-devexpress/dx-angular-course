@@ -49,17 +49,16 @@ export class AppComponent {
         ? [
             ['EmployeeID', '=', options.data.ID],
             'and',
-            [
-              ['CountryID', '=', options.data.Countries.CountryA],
-              'or',
-              ['CountryID', '=', options.data.Countries.CountryB],
-              'or',
-              ['CountryID', '=', options.data.Countries.CountryC],
-              'or',
-              ['CountryID', '=', options.data.Countries.CountryD],
-              'or',
-              ['CountryID', '=', options.data.Countries.CountryE],
-            ],
+
+            ['CountryID', '=', options.data.Countries.CountryA],
+            'or',
+            ['CountryID', '=', options.data.Countries.CountryB],
+            'or',
+            ['CountryID', '=', options.data.Countries.CountryC],
+            'or',
+            ['CountryID', '=', options.data.Countries.CountryD],
+            'or',
+            ['CountryID', '=', options.data.Countries.CountryE],
           ]
         : null,
     };
@@ -67,5 +66,9 @@ export class AppComponent {
 
   setCountryValue(rowData: any, value: any): void {
     rowData.OrderID = null;
+  }
+
+  setEmployeeValue(rowData: any, value: any): void {
+    rowData.CountryID = null;
   }
 }
