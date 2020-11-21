@@ -1,56 +1,17 @@
 <div class="content">
   <div class="card card-small">
-    <!-- <dx-form [(formData)]="formValues">
-      <dxi-item
-        itemType="simple"
-        dataField="text"
-        editorType="dxTextBox"
-        [editorOptions]="{ placeholder: 'Enter a word' }"
-      >
-        <dxi-validation-rule type="required" message="text is required"></dxi-validation-rule>
-      </dxi-item>
-      <dxi-item
-        itemType="simple"
-        dataField="nubmer"
-        editorType="dxTextBox"
-        [editorOptions]="{ placeholder: 'Enter a number' }"
-      >
-        <dxi-validation-rule
-          type="custom"
-          [validationCallback]="customCallback"
-          message="enter a number / numbers"
-          [reevaluate]="true"
-        >
-        </dxi-validation-rule>
-      </dxi-item>
-      <dxi-item itemType="button" [buttonOptions]="buttonOptions"></dxi-item>
-      <dxi-item
-        itemType="simple"
-        dataField="checkBoxValue"
-        editorType="dxCheckBox"
-        [editorOptions]="{
-          text: 'check this box to validate numbers',
-          value: false
-        }"
-      >
-        <dxo-label [visible]="false"> </dxo-label>
-        <dxi-validation-rule
-          type="compare"
-          [comparisonTarget]="checkComparison"
-          message="You must check this box"
-        >
-        </dxi-validation-rule>
-      </dxi-item>
-    </dx-form> -->
-    <dx-data-grid [dataSource]="employees">
-      <dxi-column dataField="ID" [visible]="false"></dxi-column>
-      <dxi-column dataField="FirstName" [setCellValue]="setFirstNameValue">
-        <dxi-validation-rule type="required"></dxi-validation-rule>
+    <dx-data-grid keyExpr="ID" [dataSource]="dataSource">
+      <dxo-editing mode="row" [allowUpdating]="true"> </dxo-editing>
+      <dxi-column dataField="ID" caption="Employee Name">
+        <dxo-lookup [dataSource]="dataSource" valueExpr="ID" displayExpr="FullName"> </dxo-lookup>
       </dxi-column>
-      <dxi-column dataField="LastName" [setCellValue]="setLastNameValue">
-        <dxi-validation-rule type="required"></dxi-validation-rule>
+      <dxi-column dataField="CountryID" caption="Country" [setCellValue]="setCountryValue">
+        <dxo-lookup [dataSource]="getFilteredCountries" valueExpr="ID" displayExpr="Name">
+        </dxo-lookup>
       </dxi-column>
-      <dxo-editing mode="popup" [allowUpdating]="true" [allowDeleting]="true"> </dxo-editing>
+      <dxi-column dataField="OrderID" caption="Order">
+        <dxo-lookup [dataSource]="getFilteredOrders" valueExpr="ID" displayExpr="ID"> </dxo-lookup>
+      </dxi-column>
     </dx-data-grid>
   </div>
 </div>

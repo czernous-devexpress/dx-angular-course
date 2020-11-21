@@ -1,33 +1,71 @@
 import { Component } from '@angular/core';
 
-import { EmployeesService, Employee } from './employees.service';
+import { OrdersService, Employee, Country, Order } from './orders.service';
 
 @Component({
   selector: 'demo-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [EmployeesService],
 })
 export class AppComponent {
-  employees: Employee[];
+  dataSource: Employee[];
 
-  constructor(service: EmployeesService) {
-    this.employees = service.getEmployees();
+  countries: Country[];
+
+  orders: Order[];
+
+  constructor(private service: OrdersService) {
+    this.dataSource = service.getEmployees();
+    this.countries = service.getCountries();
+    this.orders = service.getOrders();
+
+    this.getFilteredOrders = this.getFilteredOrders.bind(this);
+    this.getFilteredCountries = this.getFilteredCountries.bind(this);
   }
 
-  setLastNameValue(newData, value, currentRowData) {
-    newData.LastName = value;
-    if (value.length === 0 && currentRowData.FirstName.length === 0) {
-      newData.FirstName = 'John';
-      newData.LastName = 'Doe';
-    }
+  getFilteredCountries(options) {
+    return {
+      store: this.countries,
+      filter: options.data
+        ? [
+            ['ID', '=', options.data.Countries.CountryA],
+            'or',
+            ['ID', '=', options.data.Countries.CountryB],
+            'or',
+            ['ID', '=', options.data.Countries.CountryC],
+            'or',
+            ['ID', '=', options.data.Countries.CountryD],
+            'or',
+            ['ID', '=', options.data.Countries.CountryE],
+          ]
+        : null,
+    };
   }
 
-  setFirstNameValue(newData, value, currentRowData) {
-    newData.FirstName = value;
-    if (value.length === 0 && currentRowData.LastName.length === 0) {
-      newData.FirstName = 'John';
-      newData.LastName = 'Doe';
-    }
+  getFilteredOrders(options) {
+    return {
+      store: this.orders,
+      filter: options.data
+        ? [
+            ['EmployeeID', '=', options.data.ID],
+            'and',
+            [
+              ['CountryID', '=', options.data.Countries.CountryA],
+              'or',
+              ['CountryID', '=', options.data.Countries.CountryB],
+              'or',
+              ['CountryID', '=', options.data.Countries.CountryC],
+              'or',
+              ['CountryID', '=', options.data.Countries.CountryD],
+              'or',
+              ['CountryID', '=', options.data.Countries.CountryE],
+            ],
+          ]
+        : null,
+    };
+  }
+
+  setCountryValue(rowData: any, value: any): void {
+    rowData.OrderID = null;
   }
 }
