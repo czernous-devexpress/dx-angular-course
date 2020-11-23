@@ -8,8 +8,6 @@ export class Employee {
 
   CountryID: number;
 
-  Countries: any;
-
   OrderID: number;
 }
 
@@ -17,14 +15,19 @@ export class Country {
   ID: number;
 
   Name: string;
+
+  EmployeeID: number;
 }
 
 export class Order {
   ID: number;
 
+  Name: string;
+
   CountryID: number;
 
   EmployeeID: number;
+  
 }
 
 const employees: Employee[] = [
@@ -32,203 +35,176 @@ const employees: Employee[] = [
     'ID': 1,
     'FullName': 'John Heart',
     'CountryID': 1,
-    'OrderID': undefined,
-    'Countries': {
-      'CountryA': 1,
-      'CountryB': 2,
-      'CountryC': 5,
-      'CountryD': 0,
-      'CountryE': 0,
-    },
+    'OrderID': 1,
   },
   {
     'ID': 2,
     'FullName': 'Olivia Peyton',
-    'CountryID': 2,
-    'OrderID': 2001,
-    'Countries': {
-      'CountryA': 0,
-      'CountryB': 2,
-      'CountryC': 3,
-      'CountryD': 4,
-      'CountryE': 0,
-    },
+    'CountryID': 6,
+    'OrderID': 12,
   },
   {
     'ID': 3,
     'FullName': 'Robert Reagan',
-    'CountryID': 1,
-    'OrderID': 1002,
-    'Countries': {
-      'CountryA': 1,
-      'CountryB': 2,
-      'CountryC': 3,
-      'CountryD': 0,
-      'CountryE': 5,
-    },
+    'CountryID': 2,
+    'OrderID': 3,
   },
   {
     'ID': 4,
     'FullName': 'Greta Sims',
-    'CountryID': 3,
-    'OrderID': 3004,
-    'Countries': {
-      'CountryA': 1,
-      'CountryB': 0,
-      'CountryC': 3,
-      'CountryD': 0,
-      'CountryE': 5,
-    },
+    'CountryID': 4,
+    'OrderID': 7,
   },
 ];
 const countries: Country[] = [
   {
     'ID': 1,
-    'Name': 'Australia',
+    'Name': 'Argentina',
+    'EmployeeID': 1,
   },
   {
     'ID': 2,
-    'Name': 'Bahrain',
+    'Name': 'Australia',
+    'EmployeeID': 3,
   },
   {
     'ID': 3,
-    'Name': 'Canada',
+    'Name': 'Bolivia',
+    'EmployeeID': 1,
   },
   {
     'ID': 4,
-    'Name': 'France',
+    'Name': 'Bahrain',
+    'EmployeeID': 4,
   },
   {
     'ID': 5,
-    'Name': 'United Kingdom',
+    'Name': 'Canada',
+    'EmployeeID': 3,
   },
+  {
+    'ID': 6,
+    'Name': 'Ireland',
+    'EmployeeID': 2,
+  },
+  {
+    'ID': 7,
+    'Name': 'United States',
+    'EmployeeID': 3,
+  },
+  {
+    'ID': 8,
+    'Name': 'United Kingdom',
+    'EmployeeID': 2,
+  },
+  
 ];
 const orders: Order[] = [
   {
-    'ID': 1000,
+    'ID': 1,
+    'Name': 'Wine',
     'CountryID': 1,
+    'EmployeeID': 1,
+    
+  },
+  {
+    'ID': 2,
+    'Name': 'Beef',
+    'CountryID':  1,
     'EmployeeID': 1,
   },
   {
-    'ID': 1001,
-    'CountryID': 1,
+    'ID': 3,
+    'CountryID': 2,
+    'EmployeeID': 3,
+    'Name': 'Dried Fruit',
+  },
+  {
+    'ID': 4,
+    'CountryID': 2,
+    'EmployeeID': 3,
+    'Name': 'Swimming Shorts',
+  },
+  {
+    'ID': 5,
+    'CountryID': 3,
     'EmployeeID': 1,
+    'Name': 'Coffee',
   },
   {
-    'ID': 1002,
-    'CountryID': 1,
-    'EmployeeID': 3,
-  },
-  {
-    'ID': 1003,
-    'CountryID': 1,
-    'EmployeeID': 4,
-  },
-  {
-    'ID': 1004,
-    'CountryID': 1,
-    'EmployeeID': 5,
-  },
-  {
-    'ID': 2000,
-    'CountryID': 2,
+    'ID': 6,
+    'CountryID': 3,
     'EmployeeID': 1,
+    'Name': 'Chocolate',
   },
   {
-    'ID': 2001,
-    'CountryID': 2,
-    'EmployeeID': 2,
-  },
-  {
-    'ID': 2002,
-    'CountryID': 2,
-    'EmployeeID': 2,
-  },
-  {
-    'ID': 2003,
-    'CountryID': 2,
-    'EmployeeID': 3,
-  },
-  {
-    'ID': 2004,
-    'CountryID': 2,
-    'EmployeeID': 3,
-  },
-  {
-    'ID': 3000,
-    'CountryID': 3,
-    'EmployeeID': 2,
-  },
-  {
-    'ID': 3001,
-    'CountryID': 3,
-    'EmployeeID': 2,
-  },
-  {
-    'ID': 3002,
-    'CountryID': 3,
-    'EmployeeID': 3,
-  },
-  {
-    'ID': 3003,
-    'CountryID': 3,
-    'EmployeeID': 3,
-  },
-  {
-    'ID': 3004,
-    'CountryID': 3,
-    'EmployeeID': 4,
-  },
-  {
-    'ID': 4000,
-    'CountryID': 4,
-    'EmployeeID': 2,
-  },
-  {
-    'ID': 4001,
+    'ID': 7,
     'CountryID': 4,
     'EmployeeID': 4,
+    'Name': 'Chili Flakes',
   },
   {
-    'ID': 4002,
+    'ID': 8,
     'CountryID': 4,
     'EmployeeID': 4,
+    'Name': 'Kitchenware',
   },
   {
-    'ID': 4003,
+    'ID': 9,
     'CountryID': 4,
-    'EmployeeID': 2,
+    'EmployeeID': 4,
+    'Name': 'Aluminum',
   },
   {
-    'ID': 4004,
-    'CountryID': 4,
-    'EmployeeID': 2,
-  },
-  {
-    'ID': 5000,
-    'CountryID': 5,
-    'EmployeeID': 1,
-  },
-  {
-    'ID': 5001,
-    'CountryID': 5,
-    'EmployeeID': 1,
-  },
-  {
-    'ID': 5002,
+    'ID': 10,
     'CountryID': 5,
     'EmployeeID': 3,
+    'Name': 'Jacket',
+    
   },
   {
-    'ID': 5003,
+    'ID': 11,
     'CountryID': 5,
-    'EmployeeID': 4,
+    'EmployeeID': 3,
+    'Name': 'Boots',
   },
   {
-    'ID': 5004,
-    'CountryID': 5,
-    'EmployeeID': 4,
+    'ID': 12,
+    'CountryID': 6,
+    'EmployeeID': 2,
+    'Name': 'Vitamins',
   },
+  {
+    'ID': 13,
+    'CountryID': 6,
+    'EmployeeID': 2,
+    'Name': 'Medical Equipment',
+  },
+  {
+    'ID': 14,
+    'CountryID': 7,
+    'EmployeeID': 3,
+    'Name': 'Beef Jerky',
+  },
+  {
+    'ID': 15,
+    'CountryID': 7,
+    'EmployeeID': 3,
+    'Name': 'Coca Cola',
+  },
+  {
+    'ID': 16,
+    'CountryID': 8,
+    'EmployeeID': 2,
+    'Name': 'Aircraft Engine',
+  },
+  {
+    'ID': 17,
+    'CountryID': 8,
+    'EmployeeID': 2,
+    'Name': 'Mango Chutney',
+  },
+
 ];
 
 @Injectable({

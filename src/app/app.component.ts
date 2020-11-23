@@ -26,49 +26,28 @@ export class AppComponent {
   getFilteredCountries(options) {
     return {
       store: this.countries,
-      filter: options.data
-        ? [
-            ['ID', '=', options.data.Countries.CountryA],
-            'or',
-            ['ID', '=', options.data.Countries.CountryB],
-            'or',
-            ['ID', '=', options.data.Countries.CountryC],
-            'or',
-            ['ID', '=', options.data.Countries.CountryD],
-            'or',
-            ['ID', '=', options.data.Countries.CountryE],
-          ]
-        : null,
+      filter: options.data ? ['EmployeeID', '=', options.data.ID] : null,
     };
   }
 
   getFilteredOrders(options) {
+    const employeeFilter = ['EmployeeID', '=', options.data?.ID];
+    const countryFilter = [employeeFilter, "and", ['CountryID', '=', options.data?.CountryID]];
+    const filter = options.data?.CountryID === null ? employeeFilter : countryFilter;
     return {
       store: this.orders,
-      filter: options.data
-        ? [
-            ['EmployeeID', '=', options.data.ID],
-            'and',
-
-            ['CountryID', '=', options.data.Countries.CountryA],
-            'or',
-            ['CountryID', '=', options.data.Countries.CountryB],
-            'or',
-            ['CountryID', '=', options.data.Countries.CountryC],
-            'or',
-            ['CountryID', '=', options.data.Countries.CountryD],
-            'or',
-            ['CountryID', '=', options.data.Countries.CountryE],
-          ]
-        : null,
+      filter: options.data ? filter : null,
     };
   }
 
   setCountryValue(rowData: any, value: any): void {
     rowData.OrderID = null;
+    (<any>this).defaultSetCellValue(rowData, value);
   }
 
   setEmployeeValue(rowData: any, value: any): void {
     rowData.CountryID = null;
+    rowData.OrderID = null;
+    (<any>this).defaultSetCellValue(rowData, value);
   }
 }
