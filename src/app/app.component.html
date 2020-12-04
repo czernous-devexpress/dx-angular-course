@@ -1,17 +1,18 @@
-<div class="content">
-  <div class="card card-small">
-    <dx-data-grid keyExpr="ID" [dataSource]="dataSource">
-      <dxo-editing mode="row" [allowUpdating]="true"> </dxo-editing>
-      <dxi-column dataField="ID" caption="Employee Name" [setCellValue]="setEmployeeValue">
-        <dxo-lookup [dataSource]="dataSource" valueExpr="ID" displayExpr="FullName"> </dxo-lookup>
-      </dxi-column>
-      <dxi-column dataField="CountryID" caption="Country" [setCellValue]="setCountryValue">
-        <dxo-lookup [dataSource]="getFilteredCountries" valueExpr="ID" displayExpr="Name">
-        </dxo-lookup>
-      </dxi-column>
-      <dxi-column dataField="OrderID" caption="Order">
-        <dxo-lookup [dataSource]="getFilteredOrders" valueExpr="ID" displayExpr="Name"> </dxo-lookup>
-      </dxi-column>
-    </dx-data-grid>
-  </div>
-</div>
+<!-- <div class="content">
+  <div class="card card-small"></div>
+</div> -->
+<dx-chart id="chart" [dataSource]="dataSource" (onPointClick)="onBarClick($event)">
+  <dxi-series name="Categories" argumentField="CategoryName" type="bar" valueField="ProductQty">
+  </dxi-series>
+</dx-chart>
+<dx-popup
+  title="List of products per category"
+  [(visible)]="isPopupVisible"
+  [deferRendering]="true"
+>
+  <dx-data-grid [dataSource]="productSource">
+    <dxi-column dataField="ProductName"></dxi-column>
+    <dxi-column dataField="QuantityPerUnit"></dxi-column>
+    <dxi-column dataField="UnitsInStock"></dxi-column>
+  </dx-data-grid>
+</dx-popup>

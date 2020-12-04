@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-
-import { OrdersService, Employee, Country, Order } from './orders.service';
+import 'devextreme/data/odata/store';
+import DataSource from 'devextreme/data/data_source';
 
 @Component({
   selector: 'demo-app',
@@ -8,46 +8,62 @@ import { OrdersService, Employee, Country, Order } from './orders.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  dataSource: Employee[];
+  dataSource: any;
 
-  countries: Country[];
+  context: any;
 
-  orders: Order[];
+  productSource: any;
 
-  constructor(private service: OrdersService) {
-    this.dataSource = service.getEmployees();
-    this.countries = service.getCountries();
-    this.orders = service.getOrders();
+  products: any[];
 
-    this.getFilteredOrders = this.getFilteredOrders.bind(this);
-    this.getFilteredCountries = this.getFilteredCountries.bind(this);
+  isPopupVisible = false;
+
+  constructor() {
+    this.dataSource = new DataSource({
+      store: {
+        type: 'odata',
+        url: 'https://services.odata.org/V4/Northwind/Northwind.svc/Categories',
+        key: 'CategoryID',
+        keyType: 'Edm.Int32',
+        version: 4,
+        jsonp: true,
+      },
+      paginate: false,
+      expand: ['Products'],
+      map: (item) => {
+        return {
+          Products: item.Products,
+          ProductQty: item.Products.length,
+          CategoryName: item.CategoryName,
+          CategoryID: item.CategoryID,
+        };
+      },
+    });
+    this.productSource = new DataSource({
+      load: () => {
+        return this.products;
+      },
+      map: (item) => {
+        return {
+          ProductName: item.ProductName,
+          QuantityPerUnit: item.QuantityPerUnit,
+          UnitsInStock: item.UnitsInStock,
+        };
+      },
+    });
   }
 
-  getFilteredCountries(options) {
-    return {
-      store: this.countries,
-      filter: options.data ? ['EmployeeID', '=', options.data.ID] : null,
-    };
-  }
-
-  getFilteredOrders(options) {
-    const employeeFilter = ['EmployeeID', '=', options.data?.ID];
-    const countryFilter = [employeeFilter, "and", ['CountryID', '=', options.data?.CountryID]];
-    const filter = options.data?.CountryID === null ? employeeFilter : countryFilter;
-    return {
-      store: this.orders,
-      filter: options.data ? filter : null,
-    };
-  }
-
-  setCountryValue(rowData: any, value: any): void {
-    rowData.OrderID = null;
-    (<any>this).defaultSetCellValue(rowData, value);
-  }
-
-  setEmployeeValue(rowData: any, value: any): void {
-    rowData.CountryID = null;
-    rowData.OrderID = null;
-    (<any>this).defaultSetCellValue(rowData, value);
+  onBarClick(e: any) {
+    const bar = e.target;
+    if (bar.isSelected()) {
+      bar.clearSelection();
+      this.isPopupVisible = false;
+    } else {
+      console.log(bar.data.Cat);
+      this.products = bar.data.Products;
+      this.productSource.reload();
+      bar.select();
+      this.isPopupVisible = true;
+    }
   }
 }
