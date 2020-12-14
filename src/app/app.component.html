@@ -1,18 +1,29 @@
-<!-- <div class="content">
-  <div class="card card-small"></div>
-</div> -->
-<dx-chart id="chart" [dataSource]="dataSource" (onPointClick)="onBarClick($event)">
-  <dxi-series name="Categories" argumentField="CategoryName" type="bar" valueField="ProductQty">
-  </dxi-series>
-</dx-chart>
-<dx-popup
-  title="List of products per category"
-  [(visible)]="isPopupVisible"
-  [deferRendering]="true"
->
-  <dx-data-grid [dataSource]="productSource">
-    <dxi-column dataField="ProductName"></dxi-column>
-    <dxi-column dataField="QuantityPerUnit"></dxi-column>
-    <dxi-column dataField="UnitsInStock"></dxi-column>
-  </dx-data-grid>
-</dx-popup>
+<div class="content">
+  <div class="card card-small">
+    <dx-data-grid
+      id="gridContainer"
+      [dataSource]="dataSource"
+      keyExpr="ID"
+      [showBorders]="true"
+      (onRowClick)="handleEdit($event)"
+    >
+      <dxo-paging [enabled]="false"></dxo-paging>
+      <dxi-column dataField="Prefix" caption="Title" width="70"></dxi-column>
+      <dxi-column dataField="FirstName"></dxi-column>
+      <dxi-column dataField="LastName"></dxi-column>
+      <dxi-column dataField="BirthDate" dataType="date"> </dxi-column>
+      <dxi-column dataField="Position" width="170"> </dxi-column>
+      <dxi-column dataField="HireDate" dataType="date"> </dxi-column>
+    </dx-data-grid>
+    <dx-popup
+      title="Edit(Add) Employee data"
+      [(visible)]="isPopupVisible"
+      contentTemplate="content"
+      [width]="800"
+    >
+      <div *dxTemplate="let data of 'content'">
+        <app-popup [(employee)]="targetEmployeeData" [(popupVisibility)]="isPopupVisible"></app-popup>
+      </div>
+    </dx-popup>
+  </div>
+</div>

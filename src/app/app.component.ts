@@ -1,69 +1,63 @@
-import { Component } from '@angular/core';
-import 'devextreme/data/odata/store';
-import DataSource from 'devextreme/data/data_source';
+import { Component, DoCheck } from '@angular/core';
+
+import { Service, Employee, State } from './orders.service';
 
 @Component({
   selector: 'demo-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  providers: [Service],
 })
-export class AppComponent {
-  dataSource: any;
+export class AppComponent implements DoCheck {
+  dataSource: Employee[];
 
-  context: any;
+  states: State[];
 
-  productSource: any;
-
-  products: any[];
+  targetEmployeeData: any;
 
   isPopupVisible = false;
 
-  constructor() {
-    this.dataSource = new DataSource({
-      store: {
-        type: 'odata',
-        url: 'https://services.odata.org/V4/Northwind/Northwind.svc/Categories',
-        key: 'CategoryID',
-        keyType: 'Edm.Int32',
-        version: 4,
-        jsonp: true,
-      },
-      paginate: false,
-      expand: ['Products'],
-      map: (item) => {
-        return {
-          Products: item.Products,
-          ProductQty: item.Products.length,
-          CategoryName: item.CategoryName,
-          CategoryID: item.CategoryID,
-        };
-      },
-    });
-    this.productSource = new DataSource({
-      load: () => {
-        return this.products;
-      },
-      map: (item) => {
-        return {
-          ProductName: item.ProductName,
-          QuantityPerUnit: item.QuantityPerUnit,
-          UnitsInStock: item.UnitsInStock,
-        };
-      },
-    });
+  constructor(private service: Service) {
+    this.dataSource = service.getEmployees();
+    this.states = service.getStates();
+
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
-  onBarClick(e: any) {
-    const bar = e.target;
-    if (bar.isSelected()) {
-      bar.clearSelection();
-      this.isPopupVisible = false;
-    } else {
-      console.log(bar.data.Cat);
-      this.products = bar.data.Products;
-      this.productSource.reload();
-      bar.select();
-      this.isPopupVisible = true;
-    }
+  handleEdit(e) {
+    e.cancel = true;
+    this.isPopupVisible = !this.isPopupVisible;
+    this.targetEmployeeData = JSON.parse(JSON.stringify(e.data));
+  }
+
+  ngDoCheck(): void {
+    const nextId =
+      Math.max.apply(
+        Math,
+        this.dataSource.map((item) => item.ID),
+      ) + 1;
+    const getRandomNumber = (min, max) => {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+
+    const updateDataSource = (parentData, childData) => {
+      return childData ? Object.assign(parentData, childData) : parentData;
+    };
+    const compareSources = () => {
+      if (this.targetEmployeeData.ID === null) {
+        this.targetEmployeeData.ID = nextId;
+        this.targetEmployeeData.StateID = getRandomNumber(1, 51);
+        this.dataSource.push(this.targetEmployeeData);
+      } else {
+        this.dataSource.forEach((employee) => {
+          this.targetEmployeeData.ID === employee.ID
+            ? updateDataSource(employee, this.targetEmployeeData)
+            : null;
+        });
+      }
+    };
+    this.targetEmployeeData ? compareSources() : null;
   }
 }

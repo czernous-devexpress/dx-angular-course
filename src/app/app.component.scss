@@ -24,6 +24,7 @@ p {
   height: 440px;
 }
 .content {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,6 +55,6 @@ input {
 .card.card-small {
   height: auto;
   width: auto;
-  max-width: 90vw;
+  max-width: 1200px;
   padding: 2em;
 }
